@@ -6,21 +6,23 @@ import Character from './Character.jsx';
 var Greeting = React.createClass({
   getInitialState: function() {
     return {
-      name: 'Ellen Ripley'
+      name: 'Ellen Ripley',
+      quote: "'Nuke the entire site from orbit. It's the only way to be sure.'"
     }
   },
   // handleToggle: function() {
   //   var newSpecies = this.state.species == 'Ripley' ? 'Xenomorph' : 'Ripley';
   //   this.setState({ species: newSpecies });
   // },
-  changeName: function(newName) {
+  changeName: function(newName, newQuote) {
     this.setState({
-      name: newName
+      name: newName,
+      quote: newQuote
     });
   },
   render: function() {
     return (
-      <Character onChange={this.changeName} name={this.state.name} />
+      <Character onChange={this.changeName} name={this.state.name} quote={this.state.quote} />
     );
   }
 });

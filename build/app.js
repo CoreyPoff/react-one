@@ -9450,40 +9450,48 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Character = _react2.default.createClass({
-  displayName: "Character",
+  displayName: 'Character',
 
   handleChange: function handleChange(e) {
     var name = e.target.value;
-    this.props.onChange(name);
+    var sel = document.getElementById('characters');
+    var selected = sel.options[sel.selectedIndex];
+    var quote = selected.getAttribute('data-quote');
+    this.props.onChange(name, quote);
   },
   render: function render() {
     return _react2.default.createElement(
-      "div",
+      'div',
       null,
       _react2.default.createElement(
-        "select",
-        { id: "characters", onChange: this.handleChange },
+        'select',
+        { id: 'characters', onChange: this.handleChange },
         _react2.default.createElement(
-          "option",
-          { value: "Ellen Ripley" },
-          "Ellen Ripley"
+          'option',
+          { value: 'Ellen Ripley', 'data-quote': '\'Nuke the entire site from orbit. It\'s the only way to be sure.\'' },
+          'Ellen Ripley'
         ),
         _react2.default.createElement(
-          "option",
-          { value: "Private Hudson" },
-          "Private Hudson"
+          'option',
+          { value: 'Private Hudson', 'data-quote': '\'That\'s it, man. Game over, man. Game over!\'' },
+          'Private Hudson'
         ),
         _react2.default.createElement(
-          "option",
-          { value: "Xenomorph" },
-          "Xenomorph"
+          'option',
+          { value: 'Xenomorph', 'data-quote': '[screams and eats your face]' },
+          'Xenomorph'
         )
       ),
       _react2.default.createElement(
-        "h1",
+        'h1',
         null,
-        "Greetings, ",
+        'Greetings, ',
         this.props.name
+      ),
+      _react2.default.createElement(
+        'h3',
+        null,
+        this.props.quote
       )
     );
   }
@@ -21758,20 +21766,22 @@ var Greeting = _react2.default.createClass({
 
   getInitialState: function getInitialState() {
     return {
-      name: 'Ellen Ripley'
+      name: 'Ellen Ripley',
+      quote: "'Nuke the entire site from orbit. It's the only way to be sure.'"
     };
   },
   // handleToggle: function() {
   //   var newSpecies = this.state.species == 'Ripley' ? 'Xenomorph' : 'Ripley';
   //   this.setState({ species: newSpecies });
   // },
-  changeName: function changeName(newName) {
+  changeName: function changeName(newName, newQuote) {
     this.setState({
-      name: newName
+      name: newName,
+      quote: newQuote
     });
   },
   render: function render() {
-    return _react2.default.createElement(_Character2.default, { onChange: this.changeName, name: this.state.name });
+    return _react2.default.createElement(_Character2.default, { onChange: this.changeName, name: this.state.name, quote: this.state.quote });
   }
 });
 
