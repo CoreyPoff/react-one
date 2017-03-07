@@ -1,2 +1,4 @@
 # react-one
-My first React app, using Babel and Webpack.
+My first React app. The build process uses Babel and Webpack.
+
+Don't worry, there's more to come.
