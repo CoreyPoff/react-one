@@ -1,20 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Character from './Character.jsx';
 
+// GREETING
 var Greeting = React.createClass({
   getInitialState: function() {
-    return { species: 'Ripley' }
+    return {
+      name: 'Ellen Ripley'
+    }
   },
-  toggleSpecies: function() {
-    var newSpecies = this.state.species == 'Ripley' ? 'Xenomorph' : 'Ripley';
-    this.setState({ species: newSpecies });
+  // handleToggle: function() {
+  //   var newSpecies = this.state.species == 'Ripley' ? 'Xenomorph' : 'Ripley';
+  //   this.setState({ species: newSpecies });
+  // },
+  changeName: function(newName) {
+    this.setState({
+      name: newName
+    });
   },
   render: function() {
     return (
-      <div>
-        <p>Greetings, {this.state.species}!</p>
-        <button onClick={this.toggleSpecies}>Toggle Character</button>
-      </div>
+      <Character onChange={this.changeName} name={this.state.name} />
     );
   }
 });
