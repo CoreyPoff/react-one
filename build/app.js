@@ -9457,30 +9457,17 @@ var Character = _react2.default.createClass({
     var sel = document.getElementById('characters');
     var selected = sel.options[sel.selectedIndex];
     var quote = selected.getAttribute('data-quote');
-    this.props.onChange(name, quote);
+    var pic = selected.getAttribute('data-pic');
+    this.props.onChange(name, quote, pic);
   },
   render: function render() {
     return _react2.default.createElement(
       'div',
       null,
       _react2.default.createElement(
-        'select',
-        { id: 'characters', onChange: this.handleChange },
-        _react2.default.createElement(
-          'option',
-          { value: 'Ellen Ripley', 'data-quote': '\'Nuke the entire site from orbit. It\'s the only way to be sure.\'' },
-          'Ellen Ripley'
-        ),
-        _react2.default.createElement(
-          'option',
-          { value: 'Private Hudson', 'data-quote': '\'That\'s it, man. Game over, man. Game over!\'' },
-          'Private Hudson'
-        ),
-        _react2.default.createElement(
-          'option',
-          { value: 'Xenomorph', 'data-quote': '[screams and eats your face]' },
-          'Xenomorph'
-        )
+        'div',
+        null,
+        _react2.default.createElement('img', { src: this.props.pic })
       ),
       _react2.default.createElement(
         'h1',
@@ -9492,6 +9479,25 @@ var Character = _react2.default.createClass({
         'h3',
         null,
         this.props.quote
+      ),
+      _react2.default.createElement(
+        'select',
+        { id: 'characters', onChange: this.handleChange },
+        _react2.default.createElement(
+          'option',
+          { value: 'Ellen Ripley', 'data-quote': '\'Nuke the entire site from orbit. It\'s the only way to be sure.\'', 'data-pic': 'http://cdn.hercampus.com/s3fs-public/2014/02/17/9.jpg' },
+          'Ellen Ripley'
+        ),
+        _react2.default.createElement(
+          'option',
+          { value: 'Private Hudson', 'data-quote': '\'That\'s it, man. Game over, man. Game over!\'', 'data-pic': 'http://vignette3.wikia.nocookie.net/avp/images/d/df/Hudson.jpg/revision/latest?cb=20100110192758' },
+          'Private Hudson'
+        ),
+        _react2.default.createElement(
+          'option',
+          { value: 'Xenomorph', 'data-quote': '[screams and eats your face]', 'data-pic': 'http://vignette2.wikia.nocookie.net/alienfilm/images/c/c4/Xenomorph_Alien.jpg/revision/latest?cb=20130605012640' },
+          'Xenomorph'
+        )
       )
     );
   }
@@ -21767,21 +21773,23 @@ var Greeting = _react2.default.createClass({
   getInitialState: function getInitialState() {
     return {
       name: 'Ellen Ripley',
-      quote: "'Nuke the entire site from orbit. It's the only way to be sure.'"
+      quote: "'Nuke the entire site from orbit. It's the only way to be sure.'",
+      pic: 'http://cdn.hercampus.com/s3fs-public/2014/02/17/9.jpg'
     };
   },
   // handleToggle: function() {
   //   var newSpecies = this.state.species == 'Ripley' ? 'Xenomorph' : 'Ripley';
   //   this.setState({ species: newSpecies });
   // },
-  changeName: function changeName(newName, newQuote) {
+  changeName: function changeName(newName, newQuote, newPic) {
     this.setState({
       name: newName,
-      quote: newQuote
+      quote: newQuote,
+      pic: newPic
     });
   },
   render: function render() {
-    return _react2.default.createElement(_Character2.default, { onChange: this.changeName, name: this.state.name, quote: this.state.quote });
+    return _react2.default.createElement(_Character2.default, { onChange: this.changeName, name: this.state.name, quote: this.state.quote, pic: this.state.pic });
   }
 });
 
