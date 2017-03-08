@@ -21767,33 +21767,106 @@ var _Character2 = _interopRequireDefault(_Character);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // GREETING
-var Greeting = _react2.default.createClass({
-  displayName: 'Greeting',
+// var Greeting = React.createClass({
+//   getInitialState: function() {
+//     return {
+//       name: 'Ellen Ripley',
+//       quote: '\'Nuke the entire site from orbit. It\'s the only way to be sure.\'',
+//       pic: 'http://cdn.hercampus.com/s3fs-public/2014/02/17/9.jpg'
+//     }
+//   },
+//   // handleToggle: function() {
+//   //   var newSpecies = this.state.species == 'Ripley' ? 'Xenomorph' : 'Ripley';
+//   //   this.setState({ species: newSpecies });
+//   // },
+//   changeName: function(newName, newQuote, newPic) {
+//     this.setState({
+//       name: newName,
+//       quote: newQuote,
+//       pic: newPic
+//     });
+//   },
+//   render: function() {
+//     return (
+//       <Character onChange={this.changeName} name={this.state.name} quote={this.state.quote} pic={this.state.pic} />
+//     );
+//   }
+// });
+// TODO ITEMS
+var TodoItems = _react2.default.createClass({
+  displayName: 'TodoItems',
 
-  getInitialState: function getInitialState() {
-    return {
-      name: 'Ellen Ripley',
-      quote: "'Nuke the entire site from orbit. It's the only way to be sure.'",
-      pic: 'http://cdn.hercampus.com/s3fs-public/2014/02/17/9.jpg'
-    };
-  },
-  // handleToggle: function() {
-  //   var newSpecies = this.state.species == 'Ripley' ? 'Xenomorph' : 'Ripley';
-  //   this.setState({ species: newSpecies });
-  // },
-  changeName: function changeName(newName, newQuote, newPic) {
-    this.setState({
-      name: newName,
-      quote: newQuote,
-      pic: newPic
-    });
-  },
   render: function render() {
-    return _react2.default.createElement(_Character2.default, { onChange: this.changeName, name: this.state.name, quote: this.state.quote, pic: this.state.pic });
+    var todoEntries = this.props.entries;
+    function createTasks(item) {
+      return _react2.default.createElement(
+        'li',
+        { key: item.key },
+        item.text
+      );
+    }
+    var listItems = todoEntries.map(createTasks);
+    return _react2.default.createElement(
+      'ul',
+      { className: 'theList' },
+      listItems
+    );
   }
 });
 
-_reactDom2.default.render(_react2.default.createElement(Greeting, null), document.getElementById('container'));
+// TODO
+var TodoList = _react2.default.createClass({
+  displayName: 'TodoList',
+
+  getInitialState: function getInitialState() {
+    return {
+      items: []
+    };
+  },
+  addItem: function addItem(e) {
+    var itemArray = this.state.items;
+    itemArray.push({
+      text: this._inputElement.value,
+      key: Date.now()
+    });
+    this.setState({
+      items: itemArray
+    });
+    this._inputElement.value = "";
+    e.preventDefault();
+  },
+  render: function render() {
+    var _this = this;
+
+    return _react2.default.createElement(
+      'div',
+      { className: 'todoListMain' },
+      _react2.default.createElement(
+        'div',
+        { className: 'header' },
+        _react2.default.createElement(
+          'form',
+          { onSubmit: this.addItem },
+          _react2.default.createElement('input', { ref: function ref(a) {
+              return _this._inputElement = a;
+            }, placeholder: 'Enter Task' }),
+          _react2.default.createElement(
+            'button',
+            { type: 'submit' },
+            'Add'
+          )
+        )
+      ),
+      _react2.default.createElement(TodoItems, { entries: this.state.items })
+    );
+  }
+});
+
+_reactDom2.default.render(_react2.default.createElement(
+  'div',
+  null,
+  _react2.default.createElement(TodoList, null)
+), document.getElementById('container'));
 
 /***/ })
 /******/ ]);
